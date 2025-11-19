@@ -1,7 +1,5 @@
-IOC Report — RBFCU Azure-Hosted Phishing Site
-
 Status: Completed
-Date: (Add today’s date)
+Date: 19/11/2025
 Analyst: Siddhi Jogula
 Techniques: Credential Harvesting, Brand Impersonation
 Tools Used: VirusTotal, Hybrid Analysis, URLScan.io, OSINT
@@ -11,15 +9,25 @@ Tools Used: VirusTotal, Hybrid Analysis, URLScan.io, OSINT
 This investigation analyzes a live credential-harvesting phishing website hosted on Microsoft Azure Web Services. The page impersonates Randolph Brooks Federal Credit Union (RBFCU) and aims to trick users into submitting their banking credentials.
 
 The website performs multiple HTTP transactions, interacts with cloud/CDN infrastructure, and uses a legitimate TLS certificate issued by Microsoft Azure to appear trustworthy. No malware payloads were distributed — the objective is purely credential theft.
+
+2. Phishing URL
 https://rbfcu-star.azurewebsites.net/(S(r1sza2rk2dwnnl)2ci04ctk))/Main/Login
+
+
 (Analyzed ONLY inside sandbox tools.)
 
 3. VirusTotal Analysis
+
 Detections: 21 / 95 security vendors
+
 Categories: Phishing, Malware, Malicious
+
 Hosting: Azure Web Apps
+
 Registrar: MarkMonitor Inc.
+
 Domain Age: ~14 years (Azure default domain reused by attacker)
+
 Certificate: Trusted HTTPS cert increases user trust
 
 Reputation: Low community score
@@ -28,6 +36,7 @@ Reputation: Low community score
 4.1 Network Behavior Summary
 
 26 total HTTP transactions
+
 6 unique domains contacted
 
 Multiple country endpoints (US + Cloudflare CDN nodes)
@@ -38,19 +47,29 @@ Multiple country endpoints (US + Cloudflare CDN nodes)
 104.17.25.14   (Cloudflare)
 
 4.3 Hosting & TLS
+
 TLS Issuer: Microsoft Azure RSA TLS CA 04
+
 Certificate Validity: 6 months
+
 Infrastructure: Azure Cloud + Cloudflare reverse proxy
 
 4.4 Webpage Behavior
+
 Loads a fake RBFCU login page
+
 Attempts credential harvesting via HTML form submission
+
 No downloaded malware or file-based payloads
 
 4.5 Detected Technologies
+
 Bootstrap
+
 jQuery
+
 Modernizr
+
 Popper.js
 
 FontAwesome
@@ -78,38 +97,59 @@ None — No files extracted.
 
 Severity: High
 Primary Technique: Credential Harvesting
-
 MITRE ATT&CK Mapping:
+
 T1566.002 – Spearphishing via service
+
 T1583.003 – Cloud Infrastructure Abuse (Azure)
+
 T1071 – Application Layer Protocol (HTTPS)
+
 T1036 – Masquerading (fake banking login page)
 
 Why It’s Effective
+
 Trusted Azure subdomain → looks legitimate
+
 HTTPS padlock → increases victim trust
+
 Banking brand impersonation
+
 No malware → harder for AV tools to flag
 
 7. Recommended Defensive Actions
 For Organizations
 
 Block domains & IPs at network perimeter
+
 Add IOCs to SIEM (Splunk, Sentinel)
+
 Increase monitoring of Azure-hosted phishing sites
+
 Train users on financial-themed phishing attempts
+
 Enforce MFA for banking/financial access
 
 For End Users
+
 Do not enter credentials into unsolicited login pages
+
 Verify URLs manually
+
 Enable multi-factor authentication
 
 8. Skills Demonstrated
 
 Sandbox URL investigation
+
 Static & dynamic URL analysis
+
 IOC extraction (IPs, domains, URLs)
+
 Threat classification
+
 SOC-style reporting
+
 Web traffic behavior analysis
+
+End of Report
